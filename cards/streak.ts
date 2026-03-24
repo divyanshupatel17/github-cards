@@ -88,7 +88,7 @@ export function renderStreakCard(stats: GitHubStats, theme: Theme): string {
             <circle cx="8" cy="8" r="6" fill="#3fb950">
               <animate attributeName="opacity" values="1;0.6;1" dur="1.5s" repeatCount="indefinite"/>
             </circle>
-            <circle cx="8" cy="8" r="6" fill="#3fb950" opacity="0.3" r="0" filter="url(#glow-${id})">
+            <circle cx="8" cy="8" r="0" fill="#3fb950" opacity="0.3" filter="url(#glow-${id})">
               <animate attributeName="r" values="6;10;6" dur="1.5s" repeatCount="indefinite"/>
             </circle>
             <text x="22" y="12" fill="${theme.text}" font-family="'Segoe UI', system-ui, sans-serif" font-size="13" font-weight="700">Active</text>
