@@ -1,6 +1,6 @@
-import { Theme, createGradientDefs } from "@/lib/theme";
+import { Theme, createGradientDefs, createCardBackground } from "@/lib/theme";
 import { GitHubStats } from "@/lib/github";
-import { wrapSvg, createCard, calculatePercentages } from "@/lib/utils";
+import { wrapSvg, calculatePercentages, generateIcon } from "@/lib/utils";
 
 const languageColors: Record<string, string> = {
   JavaScript: "#f1e05a",
@@ -25,53 +25,81 @@ const languageColors: Record<string, string> = {
 };
 
 export function renderTechCard(stats: GitHubStats, theme: Theme): string {
-  const width = 400;
-  const height = 240;
+  const width = 420;
+  const height = 220;
   const id = "tech";
   const defs = createGradientDefs(theme, id);
+  const bg = createCardBackground(width, height, theme, id);
 
   const langs = calculatePercentages(stats.languages);
-  const maxBarWidth = 200;
+  const maxBarWidth = 180;
 
   const content = `
-    ${createCard(width, height, theme.background, theme.border)}
+    ${bg}
 
-    <text x="24" y="28" fill="${theme.text}" font-family="Segoe UI, Ubuntu, sans-serif" font-size="16" font-weight="600">
-      Tech Stack
-    </text>
-    <text x="24" y="44" fill="${theme.subtext}" font-family="Segoe UI, Ubuntu, sans-serif" font-size="11">
-      @${stats.user.login} · Top Languages
-    </text>
+    <g transform="translate(24, 20)">
+      ${generateIcon("code", 0, 0, 18, theme.accent)}
+      <text x="26" y="14" fill="${theme.text}" font-family="'Segoe UI', system-ui, sans-serif" font-size="16" font-weight="700">
+        Tech Stack
+      </text>
+      <text x="0" y="34" fill="${theme.subtext}" font-family="'Segoe UI', system-ui, sans-serif" font-size="11">
+        @${stats.user.login} · Top Languages
+      </text>
+    </g>
 
-    <g transform="translate(24, 60)">
+    <g transform="translate(24, 70)">
       ${langs
-        .slice(0, 6)
+        .slice(0, 5)
         .map((lang, i) => {
           const y = i * 28;
-          const barWidth = (lang.percent / 100) * maxBarWidth;
+          const barWidth = Math.max((lang.percent / 100) * maxBarWidth, 4);
           const color = languageColors[lang.name] || theme.accent;
           return `
             <g transform="translate(0, ${y})">
-              <text x="0" y="12" fill="${theme.text}" font-family="Segoe UI, Ubuntu, sans-serif" font-size="12">
+              <circle cx="5" cy="8" r="5" fill="${color}">
+                <animate attributeName="r" values="4;5;4" dur="2s" repeatCount="indefinite" begin="${i * 0.2}s"/>
+              </circle>
+
+              <text x="18" y="12" fill="${theme.text}" font-family="'Segoe UI', system-ui, sans-serif" font-size="12" font-weight="500">
                 ${lang.name}
               </text>
-              <text x="${maxBarWidth + 100}" y="12" fill="${theme.subtext}" font-family="Segoe UI, Ubuntu, sans-serif" font-size="11" text-anchor="end">
+
+              <g transform="translate(110, 0)">
+                <rect x="0" y="3" width="${maxBarWidth}" height="10" rx="5" fill="${theme.surfaceAlt}" opacity="0.5"/>
+                <rect x="0" y="3" width="${barWidth}" height="10" rx="5" fill="${color}">
+                  <animate attributeName="width" from="0" to="${barWidth}" dur="0.8s" fill="freeze" begin="${i * 0.1}s"/>
+                </rect>
+              </g>
+
+              <text x="300" y="12" fill="${theme.subtext}" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" font-weight="500">
                 ${lang.percent}%
               </text>
-              <rect x="100" y="2" width="${maxBarWidth}" height="14" rx="4" fill="${theme.border}" opacity="0.3"/>
-              <rect x="100" y="2" width="${barWidth}" height="14" rx="4" fill="${color}"/>
-              <circle cx="92" cy="9" r="4" fill="${color}"/>
             </g>
           `;
         })
         .join("")}
     </g>
 
-    <line x1="24" y1="${60 + langs.length * 28 + 10}" x2="376" y2="${60 + langs.length * 28 + 10}" stroke="${theme.border}" stroke-width="1"/>
+    <g transform="translate(24, 195)">
+      <rect x="0" y="-5" width="372" height="1" fill="url(#grad-h-${id})" opacity="0.3"/>
 
-    <text x="24" y="${60 + langs.length * 28 + 30}" fill="${theme.subtext}" font-family="Segoe UI, Ubuntu, sans-serif" font-size="10">
-      ${stats.repos.length} repositories · ${stats.totalStars} stars · ${stats.totalForks} forks
-    </text>
+      <g transform="translate(0, 8)">
+        ${generateIcon("repo", 0, -2, 12, theme.subtext)}
+        <text x="18" y="8" fill="${theme.subtext}" font-family="'Segoe UI', system-ui, sans-serif" font-size="10">
+          ${stats.repos.length} repos
+        </text>
+
+        ${generateIcon("star", 90, -2, 12, theme.subtext)}
+        <text x="108" y="8" fill="${theme.subtext}" font-family="'Segoe UI', system-ui, sans-serif" font-size="10">
+          ${stats.totalStars} stars
+        </text>
+
+        ${generateIcon("fork", 180, -2, 12, theme.subtext)}
+        <text x="198" y="8" fill="${theme.subtext}" font-family="'Segoe UI', system-ui, sans-serif" font-size="10">
+          ${stats.totalForks} forks
+        </text>
+      </g>
+    </g>
   `;
 
   return wrapSvg(content, width, height, defs);

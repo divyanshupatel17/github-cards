@@ -1,67 +1,79 @@
-import { Theme, createGradientDefs } from "@/lib/theme";
+import { Theme, createGradientDefs, createCardBackground } from "@/lib/theme";
 import { GitHubStats, calculateStreak } from "@/lib/github";
-import { wrapSvg, createCard, generateCircularProgress } from "@/lib/utils";
+import { wrapSvg, generateCircularProgress, generateIcon } from "@/lib/utils";
 
 export function renderStreakCard(stats: GitHubStats, theme: Theme): string {
-  const width = 400;
-  const height = 180;
+  const width = 420;
+  const height = 200;
   const id = "streak";
   const defs = createGradientDefs(theme, id);
+  const bg = createCardBackground(width, height, theme, id);
   const streakData = calculateStreak(stats.repos);
 
   const content = `
-    ${createCard(width, height, theme.background, theme.border)}
+    ${bg}
 
-    <text x="24" y="28" fill="${theme.text}" font-family="Segoe UI, Ubuntu, sans-serif" font-size="16" font-weight="600">
-      Contribution Streak
-    </text>
-    <text x="24" y="44" fill="${theme.subtext}" font-family="Segoe UI, Ubuntu, sans-serif" font-size="11">
-      @${stats.user.login}
-    </text>
+    <g transform="translate(24, 24)">
+      <text fill="${theme.text}" font-family="'Segoe UI', system-ui, sans-serif" font-size="16" font-weight="700">
+        Contribution Streak
+      </text>
+      <text x="0" y="18" fill="${theme.subtext}" font-family="'Segoe UI', system-ui, sans-serif" font-size="12">
+        @${stats.user.login}
+      </text>
+    </g>
 
-    <g transform="translate(90, 110)">
-      ${generateCircularProgress(
-        streakData.consistency,
-        0,
-        0,
-        45,
-        8,
-        theme.border,
-        theme.accent,
-        `grad-${id}`
-      )}
-      <text x="0" y="5" fill="${theme.text}" font-family="Segoe UI, Ubuntu, sans-serif" font-size="20" font-weight="700" text-anchor="middle">
+    <g transform="translate(100, 115)">
+      ${generateCircularProgress(streakData.consistency, 0, 0, 52, 8, theme, id)}
+      <text x="0" y="6" fill="${theme.text}" font-family="'Segoe UI', system-ui, sans-serif" font-size="28" font-weight="700" text-anchor="middle">
         ${streakData.current}
       </text>
-      <text x="0" y="20" fill="${theme.subtext}" font-family="Segoe UI, Ubuntu, sans-serif" font-size="10" text-anchor="middle">
+      <text x="0" y="22" fill="${theme.subtext}" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" text-anchor="middle">
         days
       </text>
     </g>
 
-    <g transform="translate(200, 75)">
-      <rect x="0" y="0" width="180" height="40" rx="8" fill="${theme.border}" opacity="0.3"/>
-      <text x="15" y="17" fill="${theme.subtext}" font-family="Segoe UI, Ubuntu, sans-serif" font-size="10">
-        Longest Streak
-      </text>
-      <text x="15" y="32" fill="${theme.text}" font-family="Segoe UI, Ubuntu, sans-serif" font-size="14" font-weight="600">
-        ${streakData.longest} days
-      </text>
-      <text x="110" y="17" fill="${theme.subtext}" font-family="Segoe UI, Ubuntu, sans-serif" font-size="10">
-        Consistency
-      </text>
-      <text x="110" y="32" fill="${theme.accent}" font-family="Segoe UI, Ubuntu, sans-serif" font-size="14" font-weight="600">
-        ${streakData.consistency}%
-      </text>
+    <g transform="translate(200, 65)">
+      <rect x="0" y="0" width="195" height="50" rx="10" fill="${theme.surfaceAlt}" opacity="0.4"/>
+      <rect x="0" y="0" width="195" height="50" rx="10" fill="none" stroke="${theme.border}" stroke-width="1" opacity="0.3"/>
+
+      <g transform="translate(16, 12)">
+        ${generateIcon("trending", 0, 0, 14, theme.gradient[0])}
+        <text x="22" y="10" fill="${theme.subtext}" font-family="'Segoe UI', system-ui, sans-serif" font-size="10">
+          Longest Streak
+        </text>
+        <text x="22" y="26" fill="${theme.text}" font-family="'Segoe UI', system-ui, sans-serif" font-size="16" font-weight="600">
+          ${streakData.longest} days
+        </text>
+      </g>
+
+      <g transform="translate(115, 12)">
+        ${generateIcon("zap", 0, 0, 14, theme.gradient[1])}
+        <text x="20" y="10" fill="${theme.subtext}" font-family="'Segoe UI', system-ui, sans-serif" font-size="10">
+          Consistency
+        </text>
+        <text x="20" y="26" fill="${theme.accent}" font-family="'Segoe UI', system-ui, sans-serif" font-size="16" font-weight="600">
+          ${streakData.consistency}%
+        </text>
+      </g>
     </g>
 
-    <g transform="translate(200, 125)">
-      <rect x="0" y="0" width="180" height="36" rx="8" fill="url(#grad-${id})" opacity="0.15"/>
-      <text x="90" y="14" fill="${theme.subtext}" font-family="Segoe UI, Ubuntu, sans-serif" font-size="10" text-anchor="middle">
+    <g transform="translate(200, 130)">
+      <rect x="0" y="0" width="195" height="48" rx="10" fill="url(#grad-${id})" opacity="0.15"/>
+      <rect x="0" y="0" width="195" height="48" rx="10" fill="none" stroke="url(#grad-${id})" stroke-width="1" opacity="0.4"/>
+
+      <text x="97" y="18" fill="${theme.subtext}" font-family="'Segoe UI', system-ui, sans-serif" font-size="10" text-anchor="middle">
         Current Streak
       </text>
-      <text x="90" y="29" fill="${theme.text}" font-family="Segoe UI, Ubuntu, sans-serif" font-size="14" font-weight="700" text-anchor="middle" filter="url(#glow-${id})">
-        ${streakData.current} Days
-      </text>
+      <g transform="translate(97, 24)">
+        ${generateIcon("flame", -8, 0, 16, theme.gradient[0])}
+        <text x="12" y="14" fill="${theme.text}" font-family="'Segoe UI', system-ui, sans-serif" font-size="16" font-weight="700" filter="url(#glow-${id})">
+          ${streakData.current} Days
+        </text>
+      </g>
+    </g>
+
+    <g transform="translate(24, 175)">
+      <line x1="0" y1="0" x2="130" y2="0" stroke="url(#grad-h-${id})" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
     </g>
   `;
 

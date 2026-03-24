@@ -4,31 +4,63 @@ Dynamic SVG cards for GitHub profiles. Server-side rendered, zero JavaScript, in
 
 ## Preview
 
+### Activity Card
+![Activity](https://gitsense-cards.vercel.app/api/activity?username=divyanshupatel17)
+```
+https://gitsense-cards.vercel.app/api/activity?username=divyanshupatel17
+```
+
+### Streak Card
+![Streak](https://gitsense-cards.vercel.app/api/streak?username=divyanshupatel17)
+```
+https://gitsense-cards.vercel.app/api/streak?username=divyanshupatel17
+```
+
+### Growth Card
+![Growth](https://gitsense-cards.vercel.app/api/growth?username=divyanshupatel17)
+```
+https://gitsense-cards.vercel.app/api/growth?username=divyanshupatel17
+```
+
+### Tech Stack Card
+![Tech](https://gitsense-cards.vercel.app/api/tech?username=divyanshupatel17)
+```
+https://gitsense-cards.vercel.app/api/tech?username=divyanshupatel17
+```
+
+### Featured Repo Card
+![Repo](https://gitsense-cards.vercel.app/api/repo?username=divyanshupatel17)
+```
+https://gitsense-cards.vercel.app/api/repo?username=divyanshupatel17
+```
+
+### Stats Card
+![Stats](https://gitsense-cards.vercel.app/api/stats?username=divyanshupatel17)
+```
+https://gitsense-cards.vercel.app/api/stats?username=divyanshupatel17
+```
+
+### Radar Card
+![Radar](https://gitsense-cards.vercel.app/api/radar?username=divyanshupatel17)
+```
+https://gitsense-cards.vercel.app/api/radar?username=divyanshupatel17
+```
+
+### Heatmap Card
+![Heatmap](https://gitsense-cards.vercel.app/api/heatmap?username=divyanshupatel17)
+```
+https://gitsense-cards.vercel.app/api/heatmap?username=divyanshupatel17
+```
+
 ### All Cards Combined
-![All Cards](https://gitsense-cards.vercel.app/api/all?username=divyanshupatel17)
-
-### Individual Cards
-
-| Activity | Streak |
-|----------|--------|
-| ![Activity](https://gitsense-cards.vercel.app/api/activity?username=divyanshupatel17) | ![Streak](https://gitsense-cards.vercel.app/api/streak?username=divyanshupatel17) |
-
-| Growth | Tech Stack |
-|--------|------------|
-| ![Growth](https://gitsense-cards.vercel.app/api/growth?username=divyanshupatel17) | ![Tech](https://gitsense-cards.vercel.app/api/tech?username=divyanshupatel17) |
-
-| Featured Repository |
-|---------------------|
-| ![Repo](https://gitsense-cards.vercel.app/api/repo?username=divyanshupatel17) |
+![All](https://gitsense-cards.vercel.app/api/all?username=divyanshupatel17)
+```
+https://gitsense-cards.vercel.app/api/all?username=divyanshupatel17
+```
 
 ## Usage
 
 Replace `YOUR_USERNAME` with your GitHub username.
-
-### All Cards (Combined View)
-```markdown
-![GitHub Stats](https://gitsense-cards.vercel.app/api/all?username=YOUR_USERNAME)
-```
 
 ### Activity Card
 ```markdown
@@ -50,6 +82,21 @@ Replace `YOUR_USERNAME` with your GitHub username.
 ![Tech Stack](https://gitsense-cards.vercel.app/api/tech?username=YOUR_USERNAME)
 ```
 
+### Stats Card
+```markdown
+![Stats](https://gitsense-cards.vercel.app/api/stats?username=YOUR_USERNAME)
+```
+
+### Radar Card
+```markdown
+![Radar](https://gitsense-cards.vercel.app/api/radar?username=YOUR_USERNAME)
+```
+
+### Heatmap Card
+```markdown
+![Heatmap](https://gitsense-cards.vercel.app/api/heatmap?username=YOUR_USERNAME)
+```
+
 ### Featured Repo Card
 ```markdown
 ![Repo](https://gitsense-cards.vercel.app/api/repo?username=YOUR_USERNAME)
@@ -60,33 +107,65 @@ Specific repository:
 ![Repo](https://gitsense-cards.vercel.app/api/repo?username=YOUR_USERNAME&repo=REPO_NAME)
 ```
 
+### All Cards Combined
+```markdown
+![All](https://gitsense-cards.vercel.app/api/all?username=YOUR_USERNAME)
+```
+
 ## Themes
 
 Add `&theme=THEME_NAME` to any endpoint.
 
-| Theme | Preview |
-|-------|---------|
-| `dark` | Default dark theme |
-| `light` | Light background |
-| `neon` | Cyan/magenta glow |
-| `ocean` | Deep blue/teal |
-| `sunset` | Warm orange/gold |
+| Theme | Style | Description |
+|-------|-------|-------------|
+| `dark` | Flat | Default dark theme |
+| `light` | Flat | Light background |
+| `neon` | Neon | Cyan/magenta glow effects |
+| `glass` | Glass | Glassmorphism with transparency |
+| `neumorphic` | Soft | Neumorphic soft shadows |
+| `ocean` | Flat | Deep blue/teal colors |
+| `sunset` | Flat | Warm orange/gold tones |
+| `cyberpunk` | Neon | Yellow/pink cyberpunk style |
 
-Example with theme:
+### Theme Examples
+
 ```markdown
 ![Activity](https://gitsense-cards.vercel.app/api/activity?username=YOUR_USERNAME&theme=neon)
+![Activity](https://gitsense-cards.vercel.app/api/activity?username=YOUR_USERNAME&theme=glass)
+![Activity](https://gitsense-cards.vercel.app/api/activity?username=YOUR_USERNAME&theme=cyberpunk)
 ```
 
 ## API Endpoints
 
 | Endpoint | Description |
 |----------|-------------|
-| `/api/all` | All cards combined |
-| `/api/activity` | Activity stats with graphs |
-| `/api/streak` | Contribution streak |
-| `/api/growth` | Stars and repos growth |
-| `/api/tech` | Top languages |
-| `/api/repo` | Featured repository |
+| `/api/activity` | Activity overview with weekly graphs |
+| `/api/streak` | Contribution streak with circular progress |
+| `/api/growth` | Stars and repos growth over time |
+| `/api/tech` | Top languages with animated bars |
+| `/api/stats` | GitHub stats summary with rank |
+| `/api/radar` | Developer skills radar chart |
+| `/api/heatmap` | Activity heatmap grid |
+| `/api/repo` | Featured repository card |
+| `/api/all` | All cards combined view |
+
+## Parameters
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `username` | Yes | GitHub username |
+| `theme` | No | Theme name (default: dark) |
+| `repo` | No | Repository name (for /api/repo only) |
+
+## Features
+
+- Premium UI design with multiple visual styles
+- Glassmorphism, neumorphism, and neon effects
+- Smooth SVG animations
+- Responsive and scalable
+- Fast server-side rendering
+- 1-hour cache for performance
+- Zero JavaScript in output
 
 ## Deploy Your Own
 
@@ -103,6 +182,8 @@ No environment variables required.
 npm install
 npm run dev
 ```
+
+Open `http://localhost:3000/api/activity?username=YOUR_USERNAME`
 
 ## Tech Stack
 

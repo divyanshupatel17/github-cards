@@ -36,10 +36,12 @@ export async function GET(request: NextRequest) {
         "Cache-Control": "public, max-age=3600, s-maxage=3600",
       },
     });
-  } catch (error) {
-    const errorSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="100">
-      <rect width="400" height="100" rx="12" fill="#0d1117" stroke="#30363d"/>
-      <text x="200" y="55" fill="#f85149" font-family="sans-serif" font-size="14" text-anchor="middle">
+  } catch {
+    const theme = getTheme(themeName);
+    const errorSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="420" height="100">
+      <rect width="420" height="100" rx="16" fill="${theme.background}"/>
+      <rect x="1" y="1" width="418" height="98" rx="15" fill="${theme.surface}" stroke="${theme.border}"/>
+      <text x="210" y="55" fill="#f85149" font-family="system-ui, sans-serif" font-size="14" text-anchor="middle">
         Error: Unable to fetch repository
       </text>
     </svg>`;

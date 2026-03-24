@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { fetchStats } from "@/lib/github";
 import { getTheme } from "@/lib/theme";
-import { renderGrowthCard } from "@/cards/growth";
+import { renderStatsCard } from "@/cards/stats";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
   try {
     const stats = await fetchStats(username);
     const theme = getTheme(themeName);
-    const svg = renderGrowthCard(stats, theme);
+    const svg = renderStatsCard(stats, theme);
 
     return new NextResponse(svg, {
       headers: {
