@@ -7,6 +7,7 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const username = searchParams.get("username");
   const themeName = searchParams.get("theme") || "dark";
+  const period = searchParams.get("period") || "month";
 
   if (!username) {
     return new NextResponse("Missing username parameter", { status: 400 });
@@ -15,7 +16,7 @@ export async function GET(request: NextRequest) {
   try {
     const stats = await fetchStats(username);
     const theme = getTheme(themeName);
-    const svg = renderHeatmapCard(stats, theme);
+    const svg = renderHeatmapCard(stats, theme, period);
 
     return new NextResponse(svg, {
       headers: {
@@ -25,10 +26,10 @@ export async function GET(request: NextRequest) {
     });
   } catch {
     const theme = getTheme(themeName);
-    const errorSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="420" height="100">
-      <rect width="420" height="100" rx="16" fill="${theme.background}"/>
-      <rect x="1" y="1" width="418" height="98" rx="15" fill="${theme.surface}" stroke="${theme.border}"/>
-      <text x="210" y="55" fill="#f85149" font-family="system-ui, sans-serif" font-size="14" text-anchor="middle">
+    const errorSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="450" height="100">
+      <rect width="450" height="100" rx="16" fill="${theme.background}"/>
+      <rect x="1" y="1" width="448" height="98" rx="15" fill="${theme.surface}" stroke="${theme.border}"/>
+      <text x="225" y="55" fill="#f85149" font-family="system-ui, sans-serif" font-size="14" text-anchor="middle">
         Error: Unable to fetch data for ${username}
       </text>
     </svg>`;
