@@ -5,21 +5,21 @@ Dynamic SVG cards for GitHub profiles. Server-side rendered, zero JavaScript, in
 ## Preview
 
 ### All Cards Combined
-![All Cards](https://github-cards-dun-six.vercel.app/api/all?username=divyanshupatel17)
+![All Cards](https://gitsense-cards.vercel.app/api/all?username=divyanshupatel17)
 
 ### Individual Cards
 
 | Activity | Streak |
 |----------|--------|
-| ![Activity](https://github-cards-dun-six.vercel.app/api/activity?username=divyanshupatel17) | ![Streak](https://github-cards-dun-six.vercel.app/api/streak?username=divyanshupatel17) |
+| ![Activity](https://gitsense-cards.vercel.app/api/activity?username=divyanshupatel17) | ![Streak](https://gitsense-cards.vercel.app/api/streak?username=divyanshupatel17) |
 
 | Growth | Tech Stack |
 |--------|------------|
-| ![Growth](https://github-cards-dun-six.vercel.app/api/growth?username=divyanshupatel17) | ![Tech](https://github-cards-dun-six.vercel.app/api/tech?username=divyanshupatel17) |
+| ![Growth](https://gitsense-cards.vercel.app/api/growth?username=divyanshupatel17) | ![Tech](https://gitsense-cards.vercel.app/api/tech?username=divyanshupatel17) |
 
 | Featured Repository |
 |---------------------|
-| ![Repo](https://github-cards-dun-six.vercel.app/api/repo?username=divyanshupatel17) |
+| ![Repo](https://gitsense-cards.vercel.app/api/repo?username=divyanshupatel17) |
 
 ## Usage
 
@@ -27,37 +27,37 @@ Replace `YOUR_USERNAME` with your GitHub username.
 
 ### All Cards (Combined View)
 ```markdown
-![GitHub Stats](https://github-cards-dun-six.vercel.app/api/all?username=YOUR_USERNAME)
+![GitHub Stats](https://gitsense-cards.vercel.app/api/all?username=YOUR_USERNAME)
 ```
 
 ### Activity Card
 ```markdown
-![Activity](https://github-cards-dun-six.vercel.app/api/activity?username=YOUR_USERNAME)
+![Activity](https://gitsense-cards.vercel.app/api/activity?username=YOUR_USERNAME)
 ```
 
 ### Streak Card
 ```markdown
-![Streak](https://github-cards-dun-six.vercel.app/api/streak?username=YOUR_USERNAME)
+![Streak](https://gitsense-cards.vercel.app/api/streak?username=YOUR_USERNAME)
 ```
 
 ### Growth Card
 ```markdown
-![Growth](https://github-cards-dun-six.vercel.app/api/growth?username=YOUR_USERNAME)
+![Growth](https://gitsense-cards.vercel.app/api/growth?username=YOUR_USERNAME)
 ```
 
 ### Tech Stack Card
 ```markdown
-![Tech Stack](https://github-cards-dun-six.vercel.app/api/tech?username=YOUR_USERNAME)
+![Tech Stack](https://gitsense-cards.vercel.app/api/tech?username=YOUR_USERNAME)
 ```
 
 ### Featured Repo Card
 ```markdown
-![Repo](https://github-cards-dun-six.vercel.app/api/repo?username=YOUR_USERNAME)
+![Repo](https://gitsense-cards.vercel.app/api/repo?username=YOUR_USERNAME)
 ```
 
 Specific repository:
 ```markdown
-![Repo](https://github-cards-dun-six.vercel.app/api/repo?username=YOUR_USERNAME&repo=REPO_NAME)
+![Repo](https://gitsense-cards.vercel.app/api/repo?username=YOUR_USERNAME&repo=REPO_NAME)
 ```
 
 ## Themes
@@ -74,7 +74,7 @@ Add `&theme=THEME_NAME` to any endpoint.
 
 Example with theme:
 ```markdown
-![Activity](https://github-cards-dun-six.vercel.app/api/activity?username=YOUR_USERNAME&theme=neon)
+![Activity](https://gitsense-cards.vercel.app/api/activity?username=YOUR_USERNAME&theme=neon)
 ```
 
 ## API Endpoints
